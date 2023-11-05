@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    @State private var crimeData: CrimeData = staticCrimeData[1]
+    @State private var crimeData: CrimeData = staticCrimeData[0]
     var body: some View {
             HStack {
                 VStack {
