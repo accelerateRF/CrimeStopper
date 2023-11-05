@@ -147,6 +147,9 @@ struct CrimeMessageDetail: View {
                     Text(message.time)
                     Text(message.name)
                     Spacer()
+                    Text(message.language)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                     Text(message.phone)
                 }
                 .font(.footnote)
@@ -157,6 +160,7 @@ struct CrimeMessageDetail: View {
                     Text(message.description)
                         .font(.footnote)
                         .fontWeight(.light)
+                        .frame(width: 280, height: 40)
                         .lineLimit(nil)
                         .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                 }
@@ -177,7 +181,7 @@ let staticCrimeData = [ CrimeData(id: 0,
                                               coordinate: CLLocationCoordinate2D(latitude: 37.78748, longitude: -122.40652),
                                               photos: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
                                               messages: [Message(time: "320p", name: "Jenny S", phone: "415.222.2222", description: "Masked man 6 feet tall with white sweatshirt and black shoes carrying purses."),
-                                                         Message(time: "326p", name: "Jorge G", phone: "415.123.4567", description: "White Car loaded with purses stolen from store heading down Geary."),
+                                                         Message(time: "326p", name: "Jorge G", language: "Spanish", phone: "415.123.4567", description: "White Car loaded with purses stolen from store heading down Geary."),
                                                          Message(time: "328p", name: "Gina S", phone: "415.333.3333", description: "License plate of the black mercedes getaway car is CA9999 around 5 passengers."),
                                                          Message(time: "332p", name: "John M", phone: "415.323.1212", description: "I saw a number people looting Neiman Marcus and leaving in a white Toyota Corolla."),
                                                          Message(time: "335p", name: "Cary C", phone: "408.321.1212", description: "In front of Neiman Marcus there is a man with a pistol with handful of expensive watches."),
@@ -187,7 +191,7 @@ let staticCrimeData = [ CrimeData(id: 0,
                                               summary: "A white car was broken into at 145p. The luggage from the broken into car was left at the Ikon Hotel front desk at 150p.",
                                               coordinate: CLLocationCoordinate2D(latitude: 37.78947, longitude: -122.40591),
                                               photos: ["21", "22"],
-                                              messages: [Message(time: "145p", name: "Juan B", phone: "408.332.1112", description: "Saw a couple of guys break into a white car. They parked next to it and immediately smashed the window."),
+                            messages: [Message(time: "145p", name: "Chan L", language: "Cantonese", phone: "408.332.1112", description: "Saw a couple of guys break into a white car. They parked next to it and immediately smashed the window."),
                                                          Message(time: "150p", name: "Terry B", phone: "415.123.6688", description: "A car parked in front of the Ikon Hotel got broken into and the some of the luggage was dropped on the sidewalk. I packed it up and left it work the hotel front desk."),
                                                         ]),
                   CrimeData(id: 3,
@@ -204,8 +208,17 @@ struct Message: Identifiable {
     let id = UUID()
     let time: String
     let name: String
+    let language: String
     let phone: String
     let description: String
+    
+    init(time: String, name: String, language: String = "", phone: String, description: String) {
+        self.time = time
+        self.name = name
+        self.language = language
+        self.phone = phone
+        self.description = description
+    }
 }
 
 class CrimeData: Identifiable, ObservableObject {
